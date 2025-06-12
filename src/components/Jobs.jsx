@@ -13,11 +13,11 @@ const Jobs = () => {
     if (searchedQuery && searchedQuery !== "All Jobs") {
       const filteredJobs = allJobs.filter((job) => {
         return (
-          job.title?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.description?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.location?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.jobType?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.general?.toLowerCase().includes(searchedQuery.toLowerCase())
+          job?.title?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job?.description?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job?.location?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job?.jobType?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job?.general?.toLowerCase().includes(searchedQuery.toLowerCase())
         );
       });
 
