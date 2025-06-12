@@ -80,10 +80,13 @@ const JobDescription = () => {
                     </h2>
                     <div className='space-y-3 text-sm text-gray-800'>
                         <div><span className='font-medium'>Role:</span> <span className='pl-2'>{singleJob?.title}</span></div>
-<div>
-  <span className='font-medium'>Location:</span>
-  <span className='pl-2'>{singleJob?.location || 'Not specified'}</span>
-</div>                        <div>
+{singleJob?.location && (
+  <div>
+    <span className='font-medium'>Location:</span>
+    <span className='pl-2'>{singleJob.location}</span>
+  </div>
+)}                       
+                        <div>
                             <span className='font-medium'>Description:</span>
                             <p className='pl-2 mt-1 whitespace-pre-line'>{singleJob?.description}</p>
                         </div>
