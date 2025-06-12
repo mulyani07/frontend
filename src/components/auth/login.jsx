@@ -18,7 +18,10 @@ const Login = () => {
     password: "",
     role: "",
   })
-  const { loading, user } = useSelector(store => store.auth)
+  const { loading, user } = useSelector(store => {
+    console.log("Redux auth state:", store.auth)
+    return store.auth
+  })
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -28,20 +31,37 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault()
+
+    // Validasi isian kosong
+    if (!input.email || !input.password || !input.role) {
+      toast.error("Please fill in all fields.")
+      return
+    }
+
     try {
       dispatch(setLoading(true))
+
       const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       })
+
+      console.log("API Response:", res.data)
+
       if (res.data.success) {
         dispatch(setUser(res.data.user))
-        navigate("/")
         toast.success(res.data.message)
+        navigate("/")
+      } else {
+        toast.error(res.data.message || "Login failed.")
       }
     } catch (error) {
-      console.log(error)
-      toast.error(error.response.data.message)
+      console.error("Login error:", error)
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message)
+      } else {
+        toast.error("Something went wrong. Please try again.")
+      }
     } finally {
       dispatch(setLoading(false))
     }
