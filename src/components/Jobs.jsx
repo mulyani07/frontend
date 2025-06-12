@@ -12,12 +12,15 @@ const Jobs = () => {
   useEffect(() => {
     if (searchedQuery && searchedQuery !== "All Jobs") {
       const filteredJobs = allJobs.filter((job) => {
-        return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.location.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.jobType.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          (job.general && job.general.toLowerCase().includes(searchedQuery.toLowerCase()))
+        return (
+          job.title?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job.description?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job.location?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job.jobType?.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+          job.general?.toLowerCase().includes(searchedQuery.toLowerCase())
+        );
       });
+
       setFilterJobs(filteredJobs);
     } else {
       setFilterJobs(allJobs);
